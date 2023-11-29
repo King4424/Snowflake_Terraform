@@ -38,10 +38,12 @@ resource "snowflake_table" "sensor" {
     comment = "Raw sensor data"
   }
 }
-resource "snowflake_file_format" "json_format" {
-  database = snowflake_database.demo_db.name
-  schema   = snowflake_schema.demo_schema.name
-  name     = "JSON_FORMAT"
+resource "snowflake_file_format" "json" {
+  provider             = snowflake
+  name                 = "JSON_FORMAT"
+  database             = snowflake_database.demo_db.name
+  schema               = snowflake_schema.demo_schema.name
+  format_type          = "JSON"
   strip_outer_array    = true
   compression          = "NONE"
   binary_format        = "HEX"
@@ -49,12 +51,12 @@ resource "snowflake_file_format" "json_format" {
   time_format          = "AUTO"
   timestamp_format     = "AUTO"
   skip_byte_order_mark = true
-  type = "JSON"
 }
-
 resource "snowflake_stage" "snowstage" {
-  database   = snowflake_database.demo_db.name
-  schema     = snowflake_schema.demo_schema.name
-  name       = "SNOWPIPE_STAGE"
-  file_format = snowflake_file_format.json_format.name
+  provider    = snowflake
+  name        = "SNOWPIPE_STAGE"
+  url         = "s3://snowflake-nse-data/"
+  database    = snowflake_database.demo_db.name
+  schema      = snowflake_schema.demo_schema.name
+  file_format = "FORMAT_NAME = 'JSON'"
 }
