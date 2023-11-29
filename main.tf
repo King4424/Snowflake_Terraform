@@ -52,11 +52,8 @@ resource "snowflake_file_format" "json" {
   timestamp_format     = "AUTO"
   skip_byte_order_mark = true
 }
-resource "snowflake_stage" "snowstage" {
-  provider    = snowflake
-  name        = "SNOWPIPE_STAGE"
-  url         = "s3://snowflake-nse-data/"
-  database    = snowflake_database.demo_db.name
-  schema      = snowflake_schema.demo_schema.name
-  file_format = "FORMAT_NAME = 'JSON'"
+resource "snowflake_stage" "example_stage" {
+  name   = "new_stage"
+  url    = "s3://snowflake-nse-data/" 
 }
+
