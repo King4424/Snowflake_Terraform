@@ -74,8 +74,3 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve
 
-      - name: Create File Format and Table
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: |
-          terraform apply -auto-approve -var="file_format_name=file_format1" -var="table_name=S3_integration" -var="schema_name=DEMO_SCHEMA"
-
