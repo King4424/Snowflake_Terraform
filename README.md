@@ -183,7 +183,7 @@ Then commit the changes and push them to your GitHub repository. Because of the 
 **:white_check_mark: Congratulations, you now have a working CI/CD pipeline with Terraform and Snowflake!**
 
 
-## Conclusion & Next Steps:
+##  :diamond_shape_with_a_dot_inside: Conclusion & Next Steps:
 
 **In our main.tf file we can also add resources to create File Formats, Tables, Stages, and Views.**
 
@@ -193,5 +193,7 @@ Then commit the changes and push them to your GitHub repository. Because of the 
 **IN Our repository we have our main.tf file in which you will get all the codes**
 
 
-  ## :sun_with_face: THANK YOU !!
+  
+  
+  ## :sun_with_face: THANK YOU AND WELLCOME!!
 
