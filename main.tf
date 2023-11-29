@@ -52,8 +52,5 @@ resource "snowflake_file_format" "json" {
   timestamp_format     = "AUTO"
   skip_byte_order_mark = true
 }
-resource "snowflake_stage" "example_stage" {
-  name   = "new_stage"
-  url    = "s3://snowflake-nse-data/" 
-}
+
 
