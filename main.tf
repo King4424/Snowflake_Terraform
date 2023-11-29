@@ -52,3 +52,18 @@ resource "snowflake_file_format" "json" {
   timestamp_format     = "AUTO"
   skip_byte_order_mark = true
 }
+resource "snowflake_stage" "example_stage" {
+  name        = "EXAMPLE_STAGE"
+  url         = "s3://snowflake-nse-data/"
+  database    = "EXAMPLE_DB"
+  schema      = "EXAMPLE_SCHEMA"
+  credentials = "AWS_KEY_ID='AKIASFOSIG3O2URR3G76' AWS_SECRET_KEY='B2syv7dglqFmBQN5YYDnc/YgpUajmbcvF3ov61bE'"
+}
+
+resource "snowflake_stage_grant" "grant_example_stage" {
+  database_name = snowflake_stage.example_stage.database
+  schema_name   = snowflake_stage.example_stage.schema
+  roles         = ["LOADER"]
+  privilege     = "OWNERSHIP"
+  stage_name    = snowflake_stage.example_stage.name
+}
