@@ -43,6 +43,7 @@ resource "snowflake_file_format" "example_file_format" {
   database    = "demo_db"
   schema      = "demo_schema"
   format_type = "CSV"
+  VALIDATE_UTF8 = [True]
 }
 
 
