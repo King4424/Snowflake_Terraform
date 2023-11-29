@@ -67,7 +67,7 @@ resource "snowflake_view" "view" {
   comment = "comment"
 
   statement  = <<-SQL
-    select * from foo;
+    select * from NEW_VIEW;
 SQL
   or_replace = false
   is_secure  = false
