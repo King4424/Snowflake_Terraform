@@ -58,5 +58,4 @@ resource "snowflake_stage" "snowstage" {
   url         = "s3://snowflake-nse-data/"
   database    = snowflake_database.demo_db.name
   schema      = snowflake_schema.demo_schema.name
-  file_format = "FORMAT_NAME = ${local.qualified_file_format_name}"
 }
