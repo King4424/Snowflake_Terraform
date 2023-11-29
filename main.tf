@@ -40,10 +40,10 @@ resource "snowflake_table" "sensor" {
 }
 resource "snowflake_file_format" "json" {
   provider             = snowflake
-  name                 = "JSON"
+  name                 = "JSON_FORMAT"
   database             = snowflake_database.demo_db.name
   schema               = snowflake_schema.demo_schema.name
-  format_type          = "JSON"
+  format_type          = "CSV"
   strip_outer_array    = true
   compression          = "NONE"
   binary_format        = "HEX"
@@ -52,11 +52,4 @@ resource "snowflake_file_format" "json" {
   timestamp_format     = "AUTO"
   skip_byte_order_mark = true
 }
-resource "snowflake_stage" "snowstage" {
-  provider    = snowflake
-  name        = "SNOWPIPE_STAGE"
-  url         = "s3://snowflake-nse-data/"
-  database    = snowflake_database.demo_db.name
-  schema      = snowflake_schema.demo_schema.name
-  file_format = "FORMAT_NAME = 'json'"
-}
+
