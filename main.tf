@@ -38,7 +38,6 @@ resource "snowflake_table" "demo_table" {
     type    = "TEXT"
     comment = "Description for column1"
   }
- 
   column {
     name    = "column2"
     type    = "NUMBER"
