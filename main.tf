@@ -67,7 +67,7 @@ resource "snowflake_view" "view" {
   comment = "comment"
 
   statement  = <<-SQL
-    select * from DEMO_DB;
+    select * from WEATHER_JSON;
 SQL
   or_replace = false
   is_secure  = false
