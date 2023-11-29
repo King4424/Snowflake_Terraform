@@ -55,14 +55,14 @@ resource "snowflake_file_format" "json" {
 resource "snowflake_stage" "example_stage" {
   name        = "EXAMPLE_STAGE"
   url         = "s3://snowflake-nse-data/"
-  database    = "EXAMPLE_DB"
-  schema      = "EXAMPLE_SCHEMA"
+  database    = "demo_db"
+  schema      = "demo_schema"
   credentials = "AWS_KEY_ID='AKIASFOSIG3O2URR3G76' AWS_SECRET_KEY='B2syv7dglqFmBQN5YYDnc/YgpUajmbcvF3ov61bE'"
 }
 
 resource "snowflake_stage_grant" "grant_example_stage" {
-  database_name = snowflake_stage.demo_db.database
-  schema_name   = snowflake_stage.demo_schema.schema
+  database_name = snowflake_stage.example_stage.database
+  schema_name   = snowflake_stage.example_stage.schema
   roles         = ["LOADER"]
   privilege     = "OWNERSHIP"
   stage_name    = snowflake_stage.example_stage.name
