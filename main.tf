@@ -29,9 +29,5 @@ resource "snowflake_schema" "demo_schema_new" {
   comment  = "Schema for Snowflake Terraform demo"
 }  
 
-resource "snowflake_file_format" "demo_file_format" {
-  database = snowflake_database.demo_db.demo_schema_new.name
-  name     = "demo_file_format"
-  comment  = "file format for Snowflake Terraform demo"
-}  
+
 
