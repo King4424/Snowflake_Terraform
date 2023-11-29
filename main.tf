@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "remote" {
-    organization = "Snowflake_new"
+    organization = "my-organization-name"
 
     workspaces {
       name = "gh-actions-demo"
@@ -17,6 +17,7 @@ terraform {
 
 provider "snowflake" {
 }
+
 resource "snowflake_database" "demo_db" {
   name    = "DEMO_DB"
   comment = "Database for Snowflake Terraform demo"
