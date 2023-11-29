@@ -28,7 +28,7 @@ resource "snowflake_schema" "demo_schema" {
   comment  = "Schema for Snowflake Terraform demo"
 }
 resource "snowflake_table" "sensor" {
-  provider = snowflake.terraform
+  provider = snowflake
   database = snowflake_database.demo_db.name
   schema   = snowflake_schema.demo_schema.name
   name     = "WEATHER_JSON_${local.env_upper}"
