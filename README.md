@@ -3,7 +3,7 @@ This Reposiroty will provide step-by-step instructions for how to build a CI/CD 
 ### :bookmark_tabs: Prerequisites:
 1. A Snowflake Account.
 
-2. A Snowflake User created with appropriate permissions.
+2. A Snowflake User created with appropriate permissions. 
 
 3. A GitHub Account.
 
