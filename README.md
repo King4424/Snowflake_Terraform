@@ -72,7 +72,126 @@ Action Workflows represent automated pipelines, which inludes both build and rel
 From the repository, click on the "Actions" tab near the top middle of the page.
 Click on the "set up a workflow yourself ->" link (if you already have a workflow defined click on the "new workflow" button and then the "set up a workflow yourself ->" link)
 On the new workflow page
-Name the workflow snowflake-terraform-demo.yml
-In the "Edit new file" box, replace the contents with the snowflake-terraform-demo.yml  **You will get the file in repository. Copy it From the repository**
+Name the workflow **snowflake-terraform-demo.yml**
+In the "Edit new file" box, replace the contents with the snowflake-terraform-demo.yml 
+```
+name: "Snowflake Terraform Demo Workflow"
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  snowflake-terraform-demo:
+    name: "Snowflake Terraform Demo Job"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -auto-approve
+```
+Finally, click on the green "Start commit" button near the top right of the page and then click on the green "Commit new file" in the pop up window (you can leave the default comments and commit settings). You'll now be taken to the workflow folder in your repository.
+
+A few things to point out from the YAML pipeline definition:
+
+The on: definition configures the pipeline to automatically run when a change is pushed on the main branch of the repository. So any change committed in a different branch will not automatically trigger the workflow to run.
+Please note that if you are re-using an existing GitHub repository it might retain the old master branch naming. If so, please update the YAML above (see the on: section).
+We're using the default GitHub-hosted Linux agent to execute the pipeline.
+
+##  :diamond_shape_with_a_dot_inside: Create Your First Database Migration:
+
+Open up your cloned GitHub repository in your favorite IDE and create a new file in the root named **main.tf** with the following contents. 
+
+Please be sure to replace the organization name with your Terraform Cloud organization name. 
+```
+terraform {
+  required_providers {
+    snowflake = {
+      source  = "chanzuckerberg/snowflake"
+      version = "0.25.17"
+    }
+  }
+
+  backend "remote" {
+    organization = "my-organization-name"
+
+    workspaces {
+      name = "gh-actions-demo"
+    }
+  }
+}
+
+provider "snowflake" {
+}
+```
+resource "snowflake_database" "demo_db" {
+  name    = "DEMO_DB"
+  comment = "Database for Snowflake Terraform demo"
+}
+
+Then commit the new script and push the changes to your GitHub repository. By pushing this commit to our GitHub repository the new workflow we created in the previous step will run automatically.(**We can directly create the file in GitHub also simply name it main.tf and Paste the code. No need to clone repository and use of vs code**)
+
+##   :diamond_shape_with_a_dot_inside: Confirm Changes Deployed to Snowflake:
+
+By now your first database migration should have been successfully deployed to Snowflake, and you should now have a DEMO_DB database available.
+
+<img width="945" alt="image" src="https://github.com/King4424/Snowflake_Terraform/assets/121480992/00be68d0-c0fd-4761-9934-f37dfe377e50">
+
+**GitHub Actions Log**
+
+From your repository in GitHub, click on the "Actions" tab. If everything went well, you should see a successful workflow run listed. But either way you should see the run listed under the "All workflows". To see details about the run click on the run name. From the run overview page you can further click on the job name (it should be Snowflake Terraform Demo Job) in the left hand navigation bar or on the node in the yaml file viewer. Here you can browse through the output from the various steps. In particular you might want to review the output from the Terraform Apply step.
+
+##  :diamond_shape_with_a_dot_inside: Create Your Second Database Migration:
+
+Now that we've successfully deployed our first change to Snowflake, it's time to make a second one. This time we will add a schema to the DEMO_DB and have it deployed through our automated pipeline.
+
+Open up your cloned repository in your favorite IDE and edit the main.tf file by appending the following lines to end of the file:
+```
+resource "snowflake_schema" "demo_schema" {
+  database = snowflake_database.demo_db.name
+  name     = "DEMO_SCHEMA"
+  comment  = "Schema for Snowflake Terraform demo"
+}
+```
+
+
+Then commit the changes and push them to your GitHub repository. Because of the continuous integration trigger we created in the YAML definition, your workflow should have automatically started a new run. Toggle back to your GitHub and open up the "Actions" page. From there open up the most recent workflow run and view the logs. Go through the same steps you did in the previous section to confirm that the new DEMO_SCHEMA has been deployed successfully.
+
+<img width="960" alt="image" src="https://github.com/King4424/Snowflake_Terraform/assets/121480992/1f3ec312-ff7b-4b63-9b29-8ef94cf32ea2">
+
+**:white_check_mark: Congratulations, you now have a working CI/CD pipeline with Terraform and Snowflake!**
+
+
+## Conclusion & Next Steps:
+
+**In our main.tf file we can also add resources to create File Formats, Tables, Stages, and Views.**
+
+<img width="960" alt="image" src="https://github.com/King4424/Snowflake_Terraform/assets/121480992/2a719d0c-d393-497f-84fd-51c8e5675493">
+
+
+**IN Our repository we have our main.tf file in which you will get all the codes**
+
+
+  ## :sun_with_face: THANK YOU !!
 
