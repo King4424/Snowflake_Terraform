@@ -57,7 +57,7 @@ resource "snowflake_stage" "example_stage" {
   url         = "s3://snowflake-nse-data/"
   database    = "DEMO_DB"
   schema      = "DEMO_SCHEMA"
-  credentials = "AWS_KEY_ID='AKIASFOSIG3O2URR3G76' AWS_SECRET_KEY='B2syv7dglqFmBQN5YYDnc/YgpUajmbcvF3ov61bE'"
+  credentials = "**' AWS_SECRET_KEY='**'"
 }
 resource "snowflake_view" "view" {
   database = "DEMO_DB"
