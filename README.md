@@ -1,6 +1,6 @@
 # :dart: Snwoflake Database Change Management with Terraform and GitHub
 This Reposiroty will provide step-by-step instructions for how to build a CI/CD pipeline for Snowflake with GitHub Actions and Terraform. This will provide you with enough details to get you started on your DevOps journey with Snowflake, GitHub Actions, and Terraform.
-### :bookmark_tabs: Prerequisites:
+### :books: Prerequisites:
 1. A Snowflake Account.
 
 2. A Snowflake User created with appropriate permissions. 
