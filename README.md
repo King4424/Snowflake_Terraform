@@ -144,12 +144,12 @@ terraform {
 
 provider "snowflake" {
 }
-```
+
 resource "snowflake_database" "demo_db" {
   name    = "DEMO_DB"
   comment = "Database for Snowflake Terraform demo"
 }
-
+```
 Then commit the new script and push the changes to your GitHub repository. By pushing this commit to our GitHub repository the new workflow we created in the previous step will run automatically.(**We can directly create the file in GitHub also simply name it main.tf and Paste the code. No need to clone repository and use of vs code**)
 
 ##   :diamond_shape_with_a_dot_inside: Confirm Changes Deployed to Snowflake:
