@@ -1,6 +1,6 @@
 # :dart: Snwoflake Database Change Management with Terraform and GitHub
 This Reposiroty will provide step-by-step instructions for how to build a CI/CD pipeline for Snowflake with GitHub Actions and Terraform. This will provide you with enough details to get you started on your DevOps journey with Snowflake, GitHub Actions, and Terraform.
-### :books: Prerequisites:
+### Prerequisites:
 1. A Snowflake Account.
 
 2. A Snowflake User created with appropriate permissions. 
@@ -15,7 +15,7 @@ This Reposiroty will provide step-by-step instructions for how to build a CI/CD 
 
 7. Your project repository cloned to your computer.
 
-## :ladder: Steps to Complete this project:
+## Steps to Complete this project:
 1) Setup and Configure Terraform Cloud
 2) Create the Actions Workflow in GitHub
 3) Create Your First Database Migration
@@ -23,7 +23,7 @@ This Reposiroty will provide step-by-step instructions for how to build a CI/CD 
 5) Create Your Second Database Migration
 6) Conclusion & Next Steps
 
-## :diamond_shape_with_a_dot_inside: Start to Configure Your Terraform Cloud Account 
+## Start to Configure Your Terraform Cloud Account 
 **First Create your Terraform Cloud Account.**
 
 **Create new Organzation, Give it a Organization name and your type your email ID**
@@ -54,7 +54,7 @@ Click on the "Create an API token" button, give your token a "Description" (like
 
 <img width="944" alt="image" src="https://github.com/King4424/Snowflake_Terraform/assets/121480992/a3fa93a9-5cf4-46bc-8221-6da3235a70b5">
 
-## :diamond_shape_with_a_dot_inside: Create the Actions Workflow in GitHub:
+## Create the Actions Workflow in GitHub:
 
 **Create Actions Secrets**
 
@@ -119,7 +119,7 @@ The on: definition configures the pipeline to automatically run when a change is
 Please note that if you are re-using an existing GitHub repository it might retain the old master branch naming. If so, please update the YAML above (see the on: section).
 We're using the default GitHub-hosted Linux agent to execute the pipeline.
 
-##  :diamond_shape_with_a_dot_inside: Create Your First Database Migration:
+## Create Your First Database Migration:
 
 Open up your cloned GitHub repository in your favorite IDE and create a new file in the root named **main.tf** with the following contents. 
 
@@ -152,7 +152,7 @@ resource "snowflake_database" "demo_db" {
 ```
 Then commit the new script and push the changes to your GitHub repository. By pushing this commit to our GitHub repository the new workflow we created in the previous step will run automatically.(**We can directly create the file in GitHub also simply name it main.tf and Paste the code. No need to clone repository and use of vs code**)
 
-##   :diamond_shape_with_a_dot_inside: Confirm Changes Deployed to Snowflake:
+## Confirm Changes Deployed to Snowflake:
 
 By now your first database migration should have been successfully deployed to Snowflake, and you should now have a DEMO_DB database available.
 
@@ -162,7 +162,7 @@ By now your first database migration should have been successfully deployed to S
 
 From your repository in GitHub, click on the "Actions" tab. If everything went well, you should see a successful workflow run listed. But either way you should see the run listed under the "All workflows". To see details about the run click on the run name. From the run overview page you can further click on the job name (it should be Snowflake Terraform Demo Job) in the left hand navigation bar or on the node in the yaml file viewer. Here you can browse through the output from the various steps. In particular you might want to review the output from the Terraform Apply step.
 
-##  :diamond_shape_with_a_dot_inside: Create Your Second Database Migration:
+## Create Your Second Database Migration:
 
 Now that we've successfully deployed our first change to Snowflake, it's time to make a second one. This time we will add a schema to the DEMO_DB and have it deployed through our automated pipeline.
 
@@ -180,10 +180,10 @@ Then commit the changes and push them to your GitHub repository. Because of the 
 
 <img width="960" alt="image" src="https://github.com/King4424/Snowflake_Terraform/assets/121480992/1f3ec312-ff7b-4b63-9b29-8ef94cf32ea2">
 
-**:white_check_mark: Congratulations, you now have a working CI/CD pipeline with Terraform and Snowflake!**
+**Congratulations, you now have a working CI/CD pipeline with Terraform and Snowflake!**
 
 
-##  :diamond_shape_with_a_dot_inside: Conclusion & Next Steps:
+## Conclusion & Next Steps:
 
 **In our main.tf file we can also add resources to create File Formats, Tables, Stages, and Views.**
 
